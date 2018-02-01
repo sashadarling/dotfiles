@@ -7,6 +7,7 @@ call plug#begin()
   Plug 'junegunn/fzf.vim'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+  Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
 call pathogen#infect()
@@ -14,6 +15,10 @@ call pathogen#infect()
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 syntax on
+
+set backspace=2
+set noswapfile
+set clipboard=unnamed
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
@@ -190,10 +195,7 @@ endfunction
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
- 
-" Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
-
+   
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
 
@@ -238,3 +240,7 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline_powerline_fonts = 1
 
+augroup myvimrc
+  au!
+  au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
