@@ -1,5 +1,3 @@
-call pathogen#infect()
-
 call plug#begin()
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-sensible'
@@ -10,6 +8,8 @@ call plug#begin()
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 call plug#end()
+
+call pathogen#infect()
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
