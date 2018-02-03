@@ -113,7 +113,7 @@ if bufwinnr(1)
 endif
 
 " auto switch to folder where editing file
-autocmd BufEnter * cd %:p:h
+" autocmd BufEnter * cd %:p:h
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
 
