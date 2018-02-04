@@ -7,7 +7,12 @@ call plug#begin()
   Plug 'junegunn/fzf.vim'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'editorconfig/editorconfig-vim'
+  Plug 'grassdog/tagman.vim'
+  "Plug 'editorconfig/editorconfig-vim'
+  Plug 'chase/vim-ansible-yaml'
+  Plug 'mattn/emmet-vim'
+  Plug 'mattn/webapi-vim'
+  Plug 'scrooloose/syntastic'
 call plug#end()
 
 call pathogen#infect()
@@ -68,7 +73,7 @@ set t_Co=256
 set showbreak=...
 set wrap linebreak nolist
 set lbr
-colorscheme spacegray 
+colorscheme spacegray
 set hlsearch  "Turn on highlighting of search phrase
 
 " gvim settings
@@ -99,7 +104,7 @@ set statusline+=%{fugitive#statusline()}
 
 set dictionary+=/usr/share/dict/words
 
-set nopaste 
+set nopaste
 
 filetype plugin on
 
@@ -135,7 +140,7 @@ autocmd FileType ruby set omnifunc=rubycomplete#CompleteTags
 
 " PHP specific goodies
 
-" run file with PHP CLI 
+" run file with PHP CLI
 "autocmd FileType php noremap <C-F11> :!/usr/local/bin/php %<CR>
 
 " PHP parser check
@@ -195,7 +200,7 @@ endfunction
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
-   
+
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
 
@@ -232,6 +237,8 @@ augroup _fzf
   autocmd!
   autocmd ColorScheme * call <sid>update_fzf_colors()
 augroup END
+
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " airline
 let g:airline#extensions#tabline#enabled = 1

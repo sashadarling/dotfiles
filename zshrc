@@ -1,11 +1,11 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/jstaf15/.oh-my-zsh
+export ZSH=/Users/josh/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="bira"
+ZSH_THEME="nt9"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -51,9 +51,14 @@ ZSH_THEME="bira"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git, osx)
 
+source ~/.zplug/init.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+zplug 'dracula/zsh', as:theme
+
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/jstaf15/.cm/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/josh/.cm/bin:/Users/josh/.rvm/gems/ruby-2.3.3/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -85,31 +90,22 @@ source $ZSH/oh-my-zsh.sh
 alias svn=colorsvn
 
 export MYSQL_PS1='\u@\h [\d]> '
-alias mysqldev="mysql -h mysqlvmdev-mtc01.ops.aol.com -u adops -p9tV428Uz RptView"
-alias mysql_PRODUCTION="mysql -h mysqlinfra-db.ops.aol.com -u adops -p9tV428Uz RptView"
-
-export SENCHA_HOME='/Users/jstaf15/bin/Sencha/Cmd'
-export PATH=$PATH:$SENCHA_HOME
 
 # golang
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=/Volumes/Workspace/go
 
-export PATH=$PATH:/Users/jstaf15/Development/scripts
+export PATH=$PATH:/Users/josh/Development/scripts
 
-export EDITOR=/usr/local/bin/vim
-export VISUAL=/usr/local/bin/vim
-export PATH="/Users/jstaf15/bin/Sencha/Cmd/6.1.2.15/..:$PATH"
+export EDITOR=/usr/bin/vim
+export VISUAL=/usr/bin/vim
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 source $ZSH/oh-my-zsh.sh
 
-export PATH="/Users/jstaf15/bin/Sencha/Cmd/6.1.2.15/..:$PATH"
-export PATH="/Users/jstaf15/bin/Sencha/Cmd/6.1.2.15/..:$PATH"
-
 export PATH="$HOME/.npm-packages/bin:$PATH"
 
-export NVM_DIR="/Users/jstaf15/.nvm"
+export NVM_DIR="/Users/josh/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 export PATH="$HOME/.yarn/bin:$PATH"
