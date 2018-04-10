@@ -5,7 +5,7 @@ export ZSH=/Users/josh/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="nt9"
+ZSH_THEME="bira-custom"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,16 +49,17 @@ ZSH_THEME="nt9"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git, osx)
+plugins=(git, osx, zsh-autosuggestions)
 
 source ~/.zplug/init.zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.abbr_pwd
 
+zplug 'tomsquest/nvm-auto-use'
 zplug 'dracula/zsh', as:theme
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/josh/.cm/bin:/Users/josh/.rvm/gems/ruby-2.3.3/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/josh/.cm/bin:/Users/josh/.rvm/gems/ruby-2.3.3/bin:/Users/josh/scripts"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -100,6 +101,7 @@ export PATH=$PATH:/Users/josh/Development/scripts
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
 
+source ~/.rvm/scripts/rvm
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 source $ZSH/oh-my-zsh.sh
 
@@ -123,10 +125,11 @@ _has() {
 }
 
 # fzf + ag configuration
-if _has fzf && _has ag; then
-  export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+if _has fzf && _has rg; then
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+#  export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+#  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+#  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_DEFAULT_OPTS='
     --color fg:124,bg:16,hl:202,fg+:214,bg+:52,hl+:231
     --color info:52,prompt:196,spinner:208,pointer:196,marker:208
@@ -137,3 +140,4 @@ fi
 
 compctl -g '~/.teamocil/*(:t:r)' teamocil
 
+export PATH="/usr/local/sbin:$PATH"
