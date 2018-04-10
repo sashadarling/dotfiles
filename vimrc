@@ -1,19 +1,70 @@
-call plug#begin()
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-sensible'
-  Plug 'tpope/vim-pathogen'
-  Plug 'tpope/vim-commentary'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'grassdog/tagman.vim'
-  "Plug 'editorconfig/editorconfig-vim'
-  Plug 'chase/vim-ansible-yaml'
-  Plug 'mattn/emmet-vim'
-  Plug 'mattn/webapi-vim'
-  Plug 'scrooloose/syntastic'
-call plug#end()
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-pathogen'
+Plugin 'tpope/vim-commentary'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'grassdog/tagman.vim'
+Plugin 'chase/vim-ansible-yaml'
+Plugin 'mattn/emmet-vim'
+Plugin 'mattn/webapi-vim'
+Plugin 'prettier/vim-prettier', {
+    \ 'do': 'npm install',
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'jsx', 'vue'] }
+Plugin 'jreybert/vimagit'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'moll/vim-node'
+Plugin 'posva/vim-vue'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'digitaltoad/vim-pug'
+Plugin 'elmcast/elm-vim'
+Plugin 'vim-syntastic/syntastic'
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 call pathogen#infect()
 
@@ -238,7 +289,7 @@ augroup _fzf
   autocmd ColorScheme * call <sid>update_fzf_colors()
 augroup END
 
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --glob "!yarn.lock" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 " airline
 let g:airline#extensions#tabline#enabled = 1
@@ -251,3 +302,48 @@ augroup myvimrc
   au!
   au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
+
+" prettier
+let g:prettier#quickfix_enabled = 0
+
+let g:prettier#autoformat = 0
+autocmd BufWritePre,TextChanged,InsertLeave *.js,*.css,*.scss,*.less,*.vue,*.jsx PrettierAsync
+
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
+
+nmap ; :Buffers<CR>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:ycm_semantic_triggers = {
+     \ 'elm' : ['.'],
+     \}
+
+let g:elm_jump_to_error = 0
+let g:elm_make_output_file = "elm.js"
+let g:elm_make_show_warnings = 0
+let g:elm_syntastic_show_warnings = 0
+let g:elm_browser_command = ""
+let g:elm_detailed_complete = 0
+let g:elm_format_autosave = 1
+let g:elm_format_fail_silently = 0
+let g:elm_setup_keybindings = 1
+
+let mapleader = ",,"
+
+map <Leader>f :Files<CR>
+map <Leader>r :Find<CR>
+map <Leader>b :Buffers<CR>
+map <Leader>t :Tags<CR>
