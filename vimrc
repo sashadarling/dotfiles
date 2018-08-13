@@ -51,6 +51,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'digitaltoad/vim-pug'
 Plugin 'elmcast/elm-vim'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'Valloric/YouCompleteMe'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
